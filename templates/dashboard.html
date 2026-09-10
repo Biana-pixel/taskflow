@@ -1,227 +1,469 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dashboard | TaskFlow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Dashboard | TaskFlow</title>
 
-<style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-    /* =====================================================
-       FUNDO DO DASHBOARD
-    ===================================================== */
+    <style>
 
-    .dashboard-container {
-        position: relative;
-        overflow: hidden;
+        /* =====================================================
+           FUNDO
+        ===================================================== */
 
-        background:
-            radial-gradient(
-                circle at 8% 18%,
-                rgba(22, 163, 74, 0.18),
-                transparent 25%
-            ),
-            radial-gradient(
-                circle at 92% 75%,
-                rgba(34, 197, 94, 0.15),
-                transparent 28%
-            ),
-            radial-gradient(
-                circle at 55% 5%,
-                rgba(74, 222, 128, 0.08),
-                transparent 22%
-            ),
-            linear-gradient(
-                135deg,
-                #f5fff8 0%,
-                #eaf8ef 50%,
-                #ffffff 100%
+        .dashboard-container {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at 8% 18%,
+                    rgba(22, 163, 74, 0.18),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 92% 75%,
+                    rgba(34, 197, 94, 0.15),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 55% 5%,
+                    rgba(74, 222, 128, 0.08),
+                    transparent 22%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f5fff8 0%,
+                    #eaf8ef 50%,
+                    #ffffff 100%
+                );
+        }
+
+
+        /* =====================================================
+           GRADE DECORATIVA
+        ===================================================== */
+
+        .dashboard-container::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: 0.30;
+
+            background-image:
+                linear-gradient(
+                    rgba(22, 163, 74, 0.055) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(22, 163, 74, 0.055) 1px,
+                    transparent 1px
+                );
+
+            background-size: 55px 55px;
+
+            mask-image: linear-gradient(
+                to bottom,
+                black,
+                transparent 90%
             );
-    }
-
-
-    /* =====================================================
-       LINHAS DECORATIVAS
-    ===================================================== */
-
-    .dashboard-container::before {
-        content: "";
-
-        position: absolute;
-        inset: 0;
-
-        pointer-events: none;
-
-        opacity: 0.35;
-
-        background-image:
-            linear-gradient(
-                rgba(22, 163, 74, 0.055) 1px,
-                transparent 1px
-            ),
-            linear-gradient(
-                90deg,
-                rgba(22, 163, 74, 0.055) 1px,
-                transparent 1px
-            );
-
-        background-size: 55px 55px;
-
-        mask-image: linear-gradient(
-            to bottom,
-            black,
-            transparent 90%
-        );
-    }
-
-
-    /* =====================================================
-       MANCHAS VERDES
-    ===================================================== */
-
-    .dashboard-detalhe {
-        position: absolute;
-
-        border-radius: 50%;
-
-        pointer-events: none;
-
-        z-index: 1;
-
-        filter: blur(45px);
-    }
-
-
-    .dashboard-detalhe-1 {
-        width: 330px;
-        height: 330px;
-
-        top: -110px;
-        left: -100px;
-
-        background: rgba(34, 197, 94, 0.17);
-
-        animation: dashboardFloat1 9s ease-in-out infinite;
-    }
-
-
-    .dashboard-detalhe-2 {
-        width: 380px;
-        height: 380px;
-
-        right: -140px;
-        bottom: -150px;
-
-        background: rgba(22, 163, 74, 0.14);
-
-        animation: dashboardFloat2 11s ease-in-out infinite;
-    }
-
-
-    .dashboard-detalhe-4 {
-        width: 190px;
-        height: 190px;
-
-        top: 12%;
-        right: 7%;
-
-        background: rgba(74, 222, 128, 0.08);
-
-        filter: blur(55px);
-
-        animation: dashboardFloat1 13s ease-in-out infinite reverse;
-    }
-
-
-    /* =====================================================
-       ANIMAÇÕES
-    ===================================================== */
-
-    @keyframes dashboardFloat1 {
-
-        0%,
-        100% {
-            transform: translate(0, 0);
         }
 
-        50% {
-            transform: translate(18px, 22px);
+
+        /* =====================================================
+           MANCHAS VERDES
+        ===================================================== */
+
+        .dashboard-detalhe {
+            position: absolute;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            z-index: 1;
+
+            filter: blur(45px);
         }
-    }
 
 
-    @keyframes dashboardFloat2 {
+        .dashboard-detalhe-1 {
+            width: 330px;
+            height: 330px;
 
-        0%,
-        100% {
-            transform: translate(0, 0);
+            top: -110px;
+            left: -100px;
+
+            background: rgba(34, 197, 94, 0.17);
+
+            animation: dashboardFloat1 9s ease-in-out infinite;
         }
 
-        50% {
-            transform: translate(-20px, -18px);
+
+        .dashboard-detalhe-2 {
+            width: 380px;
+            height: 380px;
+
+            right: -140px;
+            bottom: -150px;
+
+            background: rgba(22, 163, 74, 0.14);
+
+            animation: dashboardFloat2 11s ease-in-out infinite;
         }
-    }
 
 
-    /* =====================================================
-       CARD
-    ===================================================== */
+        .dashboard-detalhe-4 {
+            width: 190px;
+            height: 190px;
 
-    .dashboard-card {
-        position: relative;
+            top: 12%;
+            right: 7%;
 
-        z-index: 2;
-    }
+            background: rgba(74, 222, 128, 0.08);
 
-</style>
+            filter: blur(55px);
 
-</head><body><main class="dashboard-container">
-
-    <!-- MANCHAS VERDES DO FUNDO -->
-
-    <div class="dashboard-detalhe dashboard-detalhe-1"></div>
-
-    <div class="dashboard-detalhe dashboard-detalhe-2"></div>
-
-    <div class="dashboard-detalhe dashboard-detalhe-4"></div>
+            animation: dashboardFloat1 13s ease-in-out infinite reverse;
+        }
 
 
-    <!-- PAINEL -->
+        /* =====================================================
+           ANIMAÇÕES
+        ===================================================== */
 
-    <section class="dashboard-card">
+        @keyframes dashboardFloat1 {
 
-        <h1>TaskFlow</h1>
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
 
-        <h2>Olá, {{ nome }}! 👋</h2>
+            50% {
+                transform: translate(18px, 22px);
+            }
+        }
 
-        <p>
-            Seja bem-vindo(a) ao seu painel de tarefas.
-        </p>
 
-        <div class="dashboard-actions">
+        @keyframes dashboardFloat2 {
 
-            <a
-                href="{{ url_for('tarefas.listar') }}"
-                class="dashboard-button"
-            >
-                Minhas tarefas
-            </a>
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
 
-            <a
-                href="{{ url_for('auth.logout') }}"
-                class="dashboard-button logout"
-            >
-                Sair
-            </a>
+            50% {
+                transform: translate(-20px, -18px);
+            }
+        }
 
-        </div>
 
-    </section>
+        /* =====================================================
+           CARD PRINCIPAL
+        ===================================================== */
 
-</main>
+        .dashboard-card {
+            position: relative;
+
+            z-index: 2;
+
+            width: min(820px, 90%);
+
+            padding: 70px 50px;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.88);
+
+            border: 1px solid rgba(255, 255, 255, 0.9);
+
+            border-radius: 30px;
+
+            box-shadow:
+                0 25px 70px rgba(22, 101, 52, 0.13),
+                0 8px 25px rgba(0, 0, 0, 0.05);
+
+            backdrop-filter: blur(12px);
+
+            animation: cardEntrada 0.7s ease-out;
+        }
+
+
+        @keyframes cardEntrada {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =====================================================
+           TÍTULO TASKFLOW
+        ===================================================== */
+
+        .dashboard-card h1 {
+            margin: 0 0 22px;
+
+            font-size: clamp(3rem, 7vw, 5.5rem);
+
+            font-weight: 800;
+
+            letter-spacing: -3px;
+
+            color: #16a34a;
+
+            text-align: center;
+
+            /*
+               SOMBRA VERDE DA REFERÊNCIA
+            */
+
+            text-shadow:
+                0 3px 0 rgba(21, 128, 61, 0.18),
+                0 7px 14px rgba(22, 163, 74, 0.25),
+                0 14px 28px rgba(22, 163, 74, 0.12);
+
+            animation: tituloFlutuar 3s ease-in-out infinite;
+        }
+
+
+        @keyframes tituloFlutuar {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+
+        /* =====================================================
+           SAUDAÇÃO
+        ===================================================== */
+
+        .dashboard-card h2 {
+            margin: 0 0 12px;
+
+            font-size: clamp(1.7rem, 4vw, 2.5rem);
+
+            font-weight: 700;
+
+            color: #172033;
+
+            text-align: center;
+        }
+
+
+        /* =====================================================
+           TEXTO
+        ===================================================== */
+
+        .dashboard-card p {
+            margin: 0 auto 32px;
+
+            max-width: 600px;
+
+            font-size: 1.1rem;
+
+            line-height: 1.6;
+
+            color: #64748b;
+        }
+
+
+        /* =====================================================
+           BOTÕES
+        ===================================================== */
+
+        .dashboard-actions {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 14px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .dashboard-button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 190px;
+
+            padding: 16px 28px;
+
+            border-radius: 14px;
+
+            text-decoration: none;
+
+            font-size: 1rem;
+
+            font-weight: 700;
+
+            color: white;
+
+            background: #16a34a;
+
+            box-shadow:
+                0 8px 20px rgba(22, 163, 74, 0.22);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        .dashboard-button:hover {
+            transform: translateY(-3px);
+
+            background: #15803d;
+
+            box-shadow:
+                0 12px 25px rgba(22, 163, 74, 0.30);
+        }
+
+
+        .dashboard-button.logout {
+            min-width: 100px;
+
+            background: #64748b;
+
+            box-shadow:
+                0 8px 18px rgba(100, 116, 139, 0.20);
+        }
+
+
+        .dashboard-button.logout:hover {
+            background: #475569;
+
+            box-shadow:
+                0 12px 22px rgba(100, 116, 139, 0.25);
+        }
+
+
+        /* =====================================================
+           CELULAR
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .dashboard-card {
+                width: 92%;
+
+                padding: 50px 25px;
+
+                border-radius: 24px;
+            }
+
+
+            .dashboard-card h1 {
+                letter-spacing: -2px;
+            }
+
+
+            .dashboard-card h2 {
+                font-size: 1.6rem;
+            }
+
+
+            .dashboard-card p {
+                font-size: 1rem;
+            }
+
+
+            .dashboard-actions {
+                flex-direction: column;
+            }
+
+
+            .dashboard-button,
+            .dashboard-button.logout {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <main class="dashboard-container">
+
+        <!-- DETALHES DO FUNDO -->
+
+        <div class="dashboard-detalhe dashboard-detalhe-1"></div>
+
+        <div class="dashboard-detalhe dashboard-detalhe-2"></div>
+
+        <div class="dashboard-detalhe dashboard-detalhe-4"></div>
+
+
+        <!-- PAINEL -->
+
+        <section class="dashboard-card">
+
+            <h1>TaskFlow</h1>
+
+            <h2>Olá, {{ nome }}! 👋</h2>
+
+            <p>
+                Seja bem-vindo(a) ao seu painel de tarefas.
+            </p>
+
+            <div class="dashboard-actions">
+
+                <a
+                    href="{{ url_for('tarefas.listar') }}"
+                    class="dashboard-button"
+                >
+                    Minhas tarefas
+                </a>
+
+                <a
+                    href="{{ url_for('auth.logout') }}"
+                    class="dashboard-button logout"
+                >
+                    Sair
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
 
 </body>
-</html>
 
-</body>
 </html>
