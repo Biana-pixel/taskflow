@@ -1,18 +1,17 @@
 import os
-import psycopg2
+import mysql.connector
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
 def conectar_banco():
-    conexao = psycopg2.connect(
+    conexao = mysql.connector.connect(
         host=os.getenv("DB_HOST"),
         port=os.getenv("DB_PORT"),
-        dbname=os.getenv("DB_NAME"),
+        database=os.getenv("DB_NAME"),
         user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        sslmode="require"
+        password=os.getenv("DB_PASSWORD")
     )
 
     return conexao
@@ -24,30 +23,30 @@ def criar_tabelas():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS usuarios (
-            id SERIAL PRIMARY KEY,
+            id INT AUTO_INCREMENT PRIMARY KEY,
             nome VARCHAR(100) NOT NULL,
             email VARCHAR(150) NOT NULL UNIQUE,
             senha VARCHAR(255) NOT NULL,
             criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
+        )
     """)
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tarefas (
-            id SERIAL PRIMARY KEY,
+            id INT AUTO_INCREMENT PRIMARY KEY,
             titulo VARCHAR(150) NOT NULL,
             descricao TEXT,
-            prioridade VARCHAR(20) DEFAULT 'media',
-            status VARCHAR(20) DEFAULT 'pendente',
+            prioridade ENUM('baixa', 'media', 'alta') DEFAULT 'media',
+            status ENUM('pendente', 'em_andamento', 'concluida') DEFAULT 'pendente',
             prazo DATE,
-            usuario_id INTEGER NOT NULL,
+            usuario_id INT NOT NULL,
             criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
             CONSTRAINT fk_tarefa_usuario
                 FOREIGN KEY (usuario_id)
                 REFERENCES usuarios(id)
                 ON DELETE CASCADE
-        );
+        )
     """)
 
     conexao.commit()
