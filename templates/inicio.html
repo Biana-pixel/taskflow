@@ -1,0 +1,456 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TaskFlow | Organize suas tarefas</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+
+</head><body class="pagina-inicial"><!-- FUNDO -->
+<div class="home-orb orb-1"></div>
+<div class="home-orb orb-2"></div>
+<div class="home-grid"></div>
+
+
+<!-- CABEÇALHO -->
+<header class="home-header">
+
+    <div class="home-logo">
+
+        <span class="home-logo-icon">✓</span>
+
+        <span>TaskFlow</span>
+
+    </div>
+
+</header>
+
+
+<!-- HERO -->
+<main class="home-hero" id="inicio">
+
+
+    <!-- LADO ESQUERDO -->
+    <section class="hero-content">
+
+        <div class="hero-badge">
+
+            <span class="badge-dot"></span>
+
+            ORGANIZAÇÃO • PRODUTIVIDADE • SIMPLICIDADE
+
+        </div>
+
+
+        <h1>
+
+            Organize suas tarefas.
+
+            <span>
+                Conquiste seus objetivos.
+            </span>
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            Tenha tudo em um só lugar. Crie tarefas,
+            defina prioridades, acompanhe seu progresso
+            e mantenha sua rotina organizada.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a href="{{ url_for('auth.cadastro') }}"
+               class="hero-btn-primary">
+
+                Criar minha conta
+
+                <span>→</span>
+
+            </a>
+
+
+            <a href="{{ url_for('auth.login') }}"
+               class="hero-btn-secondary">
+
+                Já tenho uma conta
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- LADO DIREITO -->
+    <section class="hero-product">
+
+        <div class="product-glow"></div>
+
+
+        <div class="product-window">
+
+
+            <!-- BARRA SUPERIOR -->
+            <div class="window-top">
+
+                <div class="window-dots">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+                <div class="window-title">
+                    TaskFlow
+                </div>
+
+                <div class="window-user">
+                    TF
+                </div>
+
+            </div>
+
+
+            <!-- SISTEMA -->
+            <div class="taskflow-interface">
+
+
+                <!-- CONTEÚDO -->
+                <div class="product-content">
+
+
+                    <div class="product-heading">
+
+                        <div>
+
+                            <span>
+                                VISÃO GERAL
+                            </span>
+
+                            <h2>
+                                Minhas tarefas
+                            </h2>
+
+                        </div>
+
+
+                        <div class="online">
+
+                            <i></i>
+
+                            Online
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ESTATÍSTICAS -->
+                    <div class="stats">
+
+                        <div class="stat-card">
+
+                            <span>
+                                Tarefas
+                            </span>
+
+                            <strong id="total-tarefas">
+                                3
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat-card">
+
+                            <span>
+                                Concluídas
+                            </span>
+
+                            <strong class="green" id="tarefas-concluidas">
+                                1
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat-card">
+
+                            <span>
+                                Pendentes
+                            </span>
+
+                            <strong id="tarefas-pendentes">
+                                2
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PROGRESSO -->
+                    <div class="progress-card">
+
+                        <div class="progress-info">
+
+                            <div>
+
+                                <span>
+                                    Progresso geral
+                                </span>
+
+                                <strong id="porcentagem">
+                                    33%
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+
+                            <div id="barra-progresso"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TAREFAS -->
+                    <div class="demo-list">
+
+
+                        <!-- TAREFA 1 -->
+                        <div class="demo-task done tarefa-demo">
+
+                            <div class="demo-check">
+                                ✓
+                            </div>
+
+                            <div class="demo-text">
+
+                                <strong>
+                                    Estudar Python
+                                </strong>
+
+                                <span>
+                                    Hoje • Desenvolvimento
+                                </span>
+
+                            </div>
+
+                            <span class="tag tag-green">
+                                Concluída
+                            </span>
+
+                        </div>
+
+
+                        <!-- TAREFA 2 -->
+                        <div class="demo-task tarefa-demo">
+
+                            <div class="demo-check"></div>
+
+                            <div class="demo-text">
+
+                                <strong>
+                                    Finalizar projeto
+                                </strong>
+
+                                <span>
+                                    Hoje • Projeto
+                                </span>
+
+                            </div>
+
+                            <span class="tag tag-red">
+                                Alta
+                            </span>
+
+                        </div>
+
+
+                        <!-- TAREFA 3 -->
+                        <div class="demo-task tarefa-demo">
+
+                            <div class="demo-check"></div>
+
+                            <div class="demo-text">
+
+                                <strong>
+                                    Atualizar portfólio
+                                </strong>
+
+                                <span>
+                                    Amanhã • Carreira
+                                </span>
+
+                            </div>
+
+                            <span class="tag tag-yellow">
+                                Média
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- RODAPÉ -->
+<footer class="home-footer">
+
+    <span>
+        SUA ROTINA MAIS ORGANIZADA
+    </span>
+
+    <span>
+        Desenvolvido por Bianca.R.F.D.Santos
+    </span>
+
+</footer>
+
+
+<!-- JAVASCRIPT INTERATIVO -->
+<script>
+
+    const tarefas = document.querySelectorAll(".tarefa-demo");
+
+    const concluidasElemento =
+        document.getElementById("tarefas-concluidas");
+
+    const pendentesElemento =
+        document.getElementById("tarefas-pendentes");
+
+    const porcentagemElemento =
+        document.getElementById("porcentagem");
+
+    const barra =
+        document.getElementById("barra-progresso");
+
+
+    tarefas.forEach(function(tarefa) {
+
+        tarefa.addEventListener("click", function() {
+
+            tarefa.classList.toggle("done");
+
+
+            const check =
+                tarefa.querySelector(".demo-check");
+
+            const tag =
+                tarefa.querySelector(".tag");
+
+
+            if (tarefa.classList.contains("done")) {
+
+                check.textContent = "✓";
+
+                tag.textContent = "Concluída";
+
+                tag.classList.remove(
+                    "tag-red",
+                    "tag-yellow"
+                );
+
+                tag.classList.add("tag-green");
+
+            } else {
+
+                check.textContent = "";
+
+                const texto =
+                    tarefa.querySelector(".demo-text strong")
+                    .textContent.trim();
+
+
+                if (texto === "Finalizar projeto") {
+
+                    tag.textContent = "Alta";
+
+                    tag.classList.remove("tag-green");
+
+                    tag.classList.add("tag-red");
+
+                } else {
+
+                    tag.textContent = "Média";
+
+                    tag.classList.remove("tag-green");
+
+                    tag.classList.add("tag-yellow");
+
+                }
+
+            }
+
+
+            atualizarProgresso();
+
+        });
+
+    });
+
+
+    function atualizarProgresso() {
+
+        const total = tarefas.length;
+
+        const concluidas =
+            document.querySelectorAll(
+                ".tarefa-demo.done"
+            ).length;
+
+        const pendentes =
+            total - concluidas;
+
+        const porcentagem =
+            Math.round((concluidas / total) * 100);
+
+
+        concluidasElemento.textContent =
+            concluidas;
+
+        pendentesElemento.textContent =
+            pendentes;
+
+        porcentagemElemento.textContent =
+            porcentagem + "%";
+
+
+        barra.style.width =
+            porcentagem + "%";
+
+
+        if (porcentagem === 100) {
+
+            porcentagemElemento.style.color =
+                "#15803d";
+
+        }
+
+    }
+
+</script>
+
+</body></html>

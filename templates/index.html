@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>TaskFlow | Organize sua rotina</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body class="pagina-inicial">
+
+
+    <!-- DECORAÇÕES DO FUNDO -->
+
+    <div class="home-orb orb-1"></div>
+    <div class="home-orb orb-2"></div>
+    <div class="home-grid"></div>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+
+    <main class="home-central">
+
+
+        <!-- LOGO -->
+
+        <div class="home-logo">
+
+            <div class="home-logo-icon">
+                ✓
+            </div>
+
+            <span>TaskFlow</span>
+
+        </div>
+
+
+        <!-- PEQUENA FRASE -->
+
+        <div class="home-badge">
+
+            <span class="badge-dot"></span>
+
+            Organização simples e eficiente
+
+        </div>
+
+
+        <!-- TÍTULO -->
+
+        <h1>
+
+            Suas tarefas.
+            <span>Seu controle.</span>
+
+        </h1>
+
+
+        <!-- DESCRIÇÃO -->
+
+        <p class="home-description">
+
+            Organize suas atividades, defina prioridades
+            e acompanhe seu progresso em um único lugar.
+
+        </p>
+
+
+        <!-- BOTÃO PRINCIPAL -->
+
+        <div class="home-actions">
+
+            <a
+                href="{{ url_for('auth.cadastro') }}"
+                class="home-main-button"
+            >
+
+                Criar minha conta
+
+                <span>→</span>
+
+            </a>
+
+        </div>
+
+
+        <!-- INFORMAÇÕES -->
+
+        <div class="home-info">
+
+            <div class="info-item">
+
+                <span class="info-icon">✓</span>
+
+                <span>Organize suas tarefas</span>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span class="info-icon">✓</span>
+
+                <span>Defina prioridades</span>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span class="info-icon">✓</span>
+
+                <span>Acompanhe seu progresso</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- PEQUENA ILUSTRAÇÃO -->
+
+        <div class="home-mini-card">
+
+            <div class="mini-card-header">
+
+                <span>TaskFlow</span>
+
+                <span class="mini-online">
+                    ● Online
+                </span>
+
+            </div>
+
+
+            <div class="mini-task completed">
+
+                <span class="mini-check">
+                    ✓
+                </span>
+
+                <span>
+                    Organizar minhas tarefas
+                </span>
+
+            </div>
+
+
+            <div class="mini-task">
+
+                <span class="mini-check empty"></span>
+
+                <span>
+                    Finalizar projeto
+                </span>
+
+            </div>
+
+
+            <div class="mini-progress">
+
+                <div class="mini-progress-top">
+
+                    <span>Seu progresso</span>
+
+                    <strong>50%</strong>
+
+                </div>
+
+                <div class="mini-progress-bar">
+
+                    <div></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RODAPÉ -->
+
+        <footer class="home-footer">
+
+            <span>
+                TaskFlow
+            </span>
+
+            <span>
+                Organize. Priorize. Conquiste.
+            </span>
+
+        </footer>
+
+
+    </main>
+
+
+</body>
+
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dashboard | TaskFlow</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+    /* =====================================================
+       FUNDO DO DASHBOARD
+    ===================================================== */
+
+    .dashboard-container {
+        position: relative;
+        overflow: hidden;
+
+        background:
+            radial-gradient(
+                circle at 8% 18%,
+                rgba(22, 163, 74, 0.18),
+                transparent 25%
+            ),
+            radial-gradient(
+                circle at 92% 75%,
+                rgba(34, 197, 94, 0.15),
+                transparent 28%
+            ),
+            radial-gradient(
+                circle at 55% 5%,
+                rgba(74, 222, 128, 0.08),
+                transparent 22%
+            ),
+            linear-gradient(
+                135deg,
+                #f5fff8 0%,
+                #eaf8ef 50%,
+                #ffffff 100%
+            );
+    }
+
+
+    /* =====================================================
+       LINHAS DECORATIVAS
+    ===================================================== */
+
+    .dashboard-container::before {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        pointer-events: none;
+
+        opacity: 0.35;
+
+        background-image:
+            linear-gradient(
+                rgba(22, 163, 74, 0.055) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
+                90deg,
+                rgba(22, 163, 74, 0.055) 1px,
+                transparent 1px
+            );
+
+        background-size: 55px 55px;
+
+        mask-image: linear-gradient(
+            to bottom,
+            black,
+            transparent 90%
+        );
+    }
+
+
+    /* =====================================================
+       MANCHAS VERDES
+    ===================================================== */
+
+    .dashboard-detalhe {
+        position: absolute;
+
+        border-radius: 50%;
+
+        pointer-events: none;
+
+        z-index: 1;
+
+        filter: blur(45px);
+    }
+
+
+    .dashboard-detalhe-1 {
+        width: 330px;
+        height: 330px;
+
+        top: -110px;
+        left: -100px;
+
+        background: rgba(34, 197, 94, 0.17);
+
+        animation: dashboardFloat1 9s ease-in-out infinite;
+    }
+
+
+    .dashboard-detalhe-2 {
+        width: 380px;
+        height: 380px;
+
+        right: -140px;
+        bottom: -150px;
+
+        background: rgba(22, 163, 74, 0.14);
+
+        animation: dashboardFloat2 11s ease-in-out infinite;
+    }
+
+
+    .dashboard-detalhe-4 {
+        width: 190px;
+        height: 190px;
+
+        top: 12%;
+        right: 7%;
+
+        background: rgba(74, 222, 128, 0.08);
+
+        filter: blur(55px);
+
+        animation: dashboardFloat1 13s ease-in-out infinite reverse;
+    }
+
+
+    /* =====================================================
+       ANIMAÇÕES
+    ===================================================== */
+
+    @keyframes dashboardFloat1 {
+
+        0%,
+        100% {
+            transform: translate(0, 0);
+        }
+
+        50% {
+            transform: translate(18px, 22px);
+        }
+    }
+
+
+    @keyframes dashboardFloat2 {
+
+        0%,
+        100% {
+            transform: translate(0, 0);
+        }
+
+        50% {
+            transform: translate(-20px, -18px);
+        }
+    }
+
+
+    /* =====================================================
+       CARD
+    ===================================================== */
+
+    .dashboard-card {
+        position: relative;
+
+        z-index: 2;
+    }
+
+</style>
+
+</head><body><main class="dashboard-container">
+
+    <!-- MANCHAS VERDES DO FUNDO -->
+
+    <div class="dashboard-detalhe dashboard-detalhe-1"></div>
+
+    <div class="dashboard-detalhe dashboard-detalhe-2"></div>
+
+    <div class="dashboard-detalhe dashboard-detalhe-4"></div>
+
+
+    <!-- PAINEL -->
+
+    <section class="dashboard-card">
+
+        <h1>TaskFlow</h1>
+
+        <h2>Olá, {{ nome }}! 👋</h2>
+
+        <p>
+            Seja bem-vindo(a) ao seu painel de tarefas.
+        </p>
+
+        <div class="dashboard-actions">
+
+            <a
+                href="{{ url_for('tarefas.listar') }}"
+                class="dashboard-button"
+            >
+                Minhas tarefas
+            </a>
+
+            <a
+                href="{{ url_for('auth.logout') }}"
+                class="dashboard-button logout"
+            >
+                Sair
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>
+
+</body>
+</html>

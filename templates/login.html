@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | TaskFlow</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        /* TÍTULO TASKFLOW */
+        .taskflow-titulo {
+            text-shadow:
+                0 3px 10px rgba(22, 163, 74, 0.45);
+        }
+
+        /* CAMPO DE SENHA */
+        .campo-senha {
+            position: relative;
+        }
+
+        .campo-senha input {
+            width: 100%;
+            padding-right: 50px;
+        }
+
+        .mostrar-senha {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: auto !important;
+            height: auto !important;
+            padding: 0 !important;
+            margin: 0 !important;
+
+            border: none !important;
+            background: transparent !important;
+
+            font-size: 20px;
+            cursor: pointer;
+
+            color: #64748b;
+            box-shadow: none !important;
+        }
+
+        .mostrar-senha:hover {
+            background: transparent !important;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="auth-container">
+
+        <section class="auth-card">
+
+            <h1 class="taskflow-titulo">TaskFlow</h1>
+
+            <h2>Bem-vindo de volta!</h2>
+
+            <p class="auth-subtitle">
+                Entre na sua conta para continuar.
+            </p>
+
+            {% if mensagem %}
+                <div class="mensagem">
+                    {{ mensagem }}
+                </div>
+            {% endif %}
+
+            <form method="POST" autocomplete="off">
+
+                <div class="campo">
+                    <label for="email">E-mail</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="off"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="senha">Senha</label>
+
+                    <div class="campo-senha">
+
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Digite sua senha"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="mostrar-senha"
+                            id="mostrarSenha"
+                            aria-label="Mostrar senha"
+                        >
+                            👁️
+                        </button>
+
+                    </div>
+                </div>
+
+                <button type="submit">
+                    Entrar
+                </button>
+
+            </form>
+
+            <p class="auth-link">
+                Ainda não possui uma conta?
+                <a href="{{ url_for('auth.cadastro') }}">Criar conta</a>
+            </p>
+
+        </section>
+
+    </main>
+
+    <script>
+        const senha = document.getElementById("senha");
+        const mostrarSenha = document.getElementById("mostrarSenha");
+
+        mostrarSenha.addEventListener("click", function () {
+
+            if (senha.type === "password") {
+                senha.type = "text";
+                mostrarSenha.setAttribute("aria-label", "Ocultar senha");
+            } else {
+                senha.type = "password";
+                mostrarSenha.setAttribute("aria-label", "Mostrar senha");
+            }
+
+        });
+    </script>
+
+</body>
+</html>
