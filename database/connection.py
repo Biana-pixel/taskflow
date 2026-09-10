@@ -1,15 +1,15 @@
 import os
-import mysql.connector
+import psycopg2
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
 def conectar_banco():
-    conexao = mysql.connector.connect(
+    conexao = psycopg2.connect(
         host=os.getenv("DB_HOST"),
         port=os.getenv("DB_PORT"),
-        database=os.getenv("DB_NAME"),
+        dbname=os.getenv("DB_NAME"),
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASSWORD")
     )
