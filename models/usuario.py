@@ -1,4 +1,5 @@
 from database.connection import conectar_banco
+from psycopg2.extras import RealDictCursor
 
 
 def criar_usuario(nome, email, senha):
@@ -20,7 +21,7 @@ def criar_usuario(nome, email, senha):
 
 def buscar_usuario_por_email(email):
     conexao = conectar_banco()
-    cursor = conexao.cursor(dictionary=True)
+    cursor = conexao.cursor(cursor_factory=RealDictCursor)
 
     sql = """
         SELECT id, nome, email, senha
