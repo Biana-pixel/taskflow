@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 
 from config import Config
-from database.connection import conectar_banco
+from database.connection import conectar_banco, criar_tabelas
 
 from routes.auth import auth
 from routes.dashboard import dashboard
@@ -10,6 +10,13 @@ from routes.tarefas import tarefas
 
 app = Flask(__name__)
 app.config.from_object(Config)
+
+
+# Cria as tabelas do TaskFlow no banco
+try:
+    criar_tabelas()
+except Exception as erro:
+    print(f"Erro ao criar tabelas: {erro}")
 
 
 # Registra as rotas
@@ -31,15 +38,9 @@ def teste_banco():
     try:
         conexao = conectar_banco()
 
-        if conexao.is_connected():
-            return render_template(
-                "teste_banco.html",
-                sucesso=True
-            )
-
         return render_template(
             "teste_banco.html",
-            sucesso=False
+            sucesso=True
         )
 
     except Exception as erro:
@@ -51,7 +52,7 @@ def teste_banco():
 
     finally:
 
-        if conexao is not None and conexao.is_connected():
+        if conexao is not None:
             conexao.close()
 
 
