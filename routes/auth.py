@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 
 from services.auth_service import cadastrar_usuario, autenticar_usuario
+from models.usuario import buscar_usuario_por_email
 
 
 auth = Blueprint("auth", __name__)
@@ -22,7 +23,18 @@ def cadastro():
         sucesso, mensagem = cadastrar_usuario(nome, email, senha)
 
         if sucesso:
-            return redirect(url_for("auth.login"))
+            # Busca o usuário recém-cadastrado
+            usuario = buscar_usuario_por_email(email)
+
+            # Cria a sessão automaticamente
+            if usuario:
+                session["usuario_id"] = usuario["id"]
+                session["usuario_nome"] = usuario["nome"]
+
+                # Entra direto no dashboard
+                return redirect(url_for("dashboard.index"))
+
+        return render_template("cadastro.html", mensagem=mensagem)
 
     return render_template("cadastro.html", mensagem=mensagem)
 
