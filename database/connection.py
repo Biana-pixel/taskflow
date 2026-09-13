@@ -1,18 +1,17 @@
 import os
-import mysql.connector
+import psycopg2
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
 def conectar_banco():
-    conexao = mysql.connector.connect(
+    conexao = psycopg2.connect(
         host=os.getenv("DB_HOST"),
         port=os.getenv("DB_PORT"),
-        database=os.getenv("DB_NAME"),
+        dbname=os.getenv("DB_NAME"),
         user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        ssl_disabled=False
+        password=os.getenv("DB_PASSWORD")
     )
 
     return conexao
@@ -24,7 +23,7 @@ def criar_tabelas():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS usuarios (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            id SERIAL PRIMARY KEY,
             nome VARCHAR(100) NOT NULL,
             email VARCHAR(150) NOT NULL UNIQUE,
             senha VARCHAR(255) NOT NULL,
@@ -34,13 +33,13 @@ def criar_tabelas():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tarefas (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            id SERIAL PRIMARY KEY,
             titulo VARCHAR(150) NOT NULL,
             descricao TEXT,
-            prioridade ENUM('baixa', 'media', 'alta') DEFAULT 'media',
-            status ENUM('pendente', 'em_andamento', 'concluida') DEFAULT 'pendente',
+            prioridade VARCHAR(20) DEFAULT 'media',
+            status VARCHAR(20) DEFAULT 'pendente',
             prazo DATE,
-            usuario_id INT NOT NULL,
+            usuario_id INTEGER NOT NULL,
             criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
             CONSTRAINT fk_tarefa_usuario
