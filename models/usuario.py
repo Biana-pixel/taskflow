@@ -20,7 +20,7 @@ def criar_usuario(nome, email, senha):
 
 def buscar_usuario_por_email(email):
     conexao = conectar_banco()
-    cursor = conexao.cursor(dictionary=True)
+    cursor = conexao.cursor()
 
     sql = """
         SELECT id, nome, email, senha
