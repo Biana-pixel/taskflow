@@ -37,7 +37,7 @@ def criar_tarefa(titulo, descricao, prioridade, status, prazo, usuario_id):
 
 def listar_tarefas(usuario_id):
     conexao = conectar_banco()
-    cursor = conexao.cursor(dictionary=True)
+    cursor = conexao.cursor()
 
     cursor.execute("""
         SELECT *
@@ -46,7 +46,21 @@ def listar_tarefas(usuario_id):
         ORDER BY id DESC
     """, (usuario_id,))
 
-    tarefas = cursor.fetchall()
+    resultados = cursor.fetchall()
+
+    tarefas = []
+
+    for resultado in resultados:
+        tarefa = {
+            "id": resultado[0],
+            "titulo": resultado[1],
+            "descricao": resultado[2],
+            "prioridade": resultado[3],
+            "status": resultado[4],
+            "prazo": resultado[5],
+            "usuario_id": resultado[6]
+        }
+        tarefas.append(tarefa)
 
     cursor.close()
     conexao.close()
@@ -56,7 +70,7 @@ def listar_tarefas(usuario_id):
 
 def buscar_tarefa(id, usuario_id):
     conexao = conectar_banco()
-    cursor = conexao.cursor(dictionary=True)
+    cursor = conexao.cursor()
 
     cursor.execute("""
         SELECT *
@@ -65,12 +79,23 @@ def buscar_tarefa(id, usuario_id):
         AND usuario_id = %s
     """, (id, usuario_id))
 
-    tarefa = cursor.fetchone()
+    resultado = cursor.fetchone()
 
     cursor.close()
     conexao.close()
 
-    return tarefa
+    if resultado:
+        return {
+            "id": resultado[0],
+            "titulo": resultado[1],
+            "descricao": resultado[2],
+            "prioridade": resultado[3],
+            "status": resultado[4],
+            "prazo": resultado[5],
+            "usuario_id": resultado[6]
+        }
+
+    return None
 
 
 def atualizar_tarefa(
