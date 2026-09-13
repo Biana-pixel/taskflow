@@ -8,14 +8,19 @@ def criar_usuario(nome, email, senha):
     sql = """
         INSERT INTO usuarios (nome, email, senha)
         VALUES (%s, %s, %s)
+        RETURNING id
     """
 
     cursor.execute(sql, (nome, email, senha))
+
+    usuario_id = cursor.fetchone()[0]
 
     conexao.commit()
 
     cursor.close()
     conexao.close()
+
+    return usuario_id
 
 
 def buscar_usuario_por_email(email):
@@ -30,9 +35,17 @@ def buscar_usuario_por_email(email):
 
     cursor.execute(sql, (email,))
 
-    usuario = cursor.fetchone()
+    resultado = cursor.fetchone()
 
     cursor.close()
     conexao.close()
 
-    return usuario
+    if resultado:
+        return {
+            "id": resultado[0],
+            "nome": resultado[1],
+            "email": resultado[2],
+            "senha": resultado[3]
+        }
+
+    return None
